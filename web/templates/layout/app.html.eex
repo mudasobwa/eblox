@@ -9,7 +9,9 @@
 
     <title>Hello Eblox!</title>
 
+    <!-- fonts -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arsenal:400,700|Roboto:400,700|Marmelad|Yanone+Kaffeesatz:400,700&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 
     <!-- wc -->
     <script type="text/javascript" src="<%= static_path(@conn, "/wc/webcomponentsjs/webcomponents-lite.min.js") %>"></script>
