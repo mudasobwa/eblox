@@ -85,23 +85,24 @@ exports.config = {
           // used, not even the global will be used, this is fully distinct.
         }
       },
-      // copyPathsToPublic: { // A set of paths to copy.
-      //   paths: {
-      //     "webcomponents/_polymer": [ // Place in 'public' to copy to
-      //       "web/static/webcomponents/_polymer"
-      //       // List of files to copy from, if this is a directory then copy all
-      //       // the files in the directory, not the directory itself.
-      //     ]
-      //   },
-      //   // verbosity: If 0 then no logging, if 1 then single line summary, if 2
-      //   // then summary per directory recursed into, if 3 then each and every
-      //   // file that is copied is printed.
-      //   verbosity: 1,
-      //   // onlyChanged: If true then compares timestamps before copying, this is
-      //   // only useful when 'watch' is used, it will always copy files
-      //   // regardless when just doing a normal build.
-      //   onlyChanged: true
-      // }
+      copyPathsToPublic: { // A set of paths to copy.
+        paths: {
+          "wc": [ // Place in 'public' to copy to
+            // "web/static/webcomponents/_polymer"
+            "bower_components"
+            // List of files to copy from, if this is a directory then copy all
+            // the files in the directory, not the directory itself.
+          ]
+        },
+        // verbosity: If 0 then no logging, if 1 then single line summary, if 2
+        // then summary per directory recursed into, if 3 then each and every
+        // file that is copied is printed.
+        verbosity: 1,
+        // onlyChanged: If true then compares timestamps before copying, this is
+        // only useful when 'watch' is used, it will always copy files
+        // regardless when just doing a normal build.
+        onlyChanged: true
+      }
     }
   },
 

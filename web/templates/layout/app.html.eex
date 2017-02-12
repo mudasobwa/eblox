@@ -11,6 +11,10 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- wc -->
+    <script type="text/javascript" src="<%= static_path(@conn, "/wc/webcomponentsjs/webcomponents-lite.min.js") %>"></script>
+    <link rel="import" href="<%= static_path(@conn, "/wc/leaflet-map/leaflet-map.html") %>">
+
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -28,8 +32,19 @@
       </div>
     </nav>
 
+    <leaflet-map style="height:200px;" latitude="51.505" longitude="-0.09" zoom="13"></leaflet-map>
+
+    <websocket-component  url="{{wsURL}}"
+                          protocols="{{wsProtocols}}"
+                          status="{{wsStatus}}"
+                          auto>
+    </websocket-component>
+
     <div class="container">
       <div class="section">
+        <!-- Use element -->
+        <google-map latitude="37.790" longitude="-122.390"></google-map>
+
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
         <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       </div>
@@ -79,11 +94,6 @@
             </div>
           </div>
         </div>
-
-      </div>
-      <br><br>
-
-      <div class="section">
 
       </div>
     </div>
