@@ -36,12 +36,6 @@
 
     <!--leaflet-map style="height:200px;" latitude="51.505" longitude="-0.09" zoom="13"></leaflet-map-->
 
-    <websocket-component  url="{{wsURL}}"
-                          protocols="{{wsProtocols}}"
-                          status="{{wsStatus}}"
-                          auto>
-    </websocket-component>
-
     <div class="container">
       <div class="section">
         <!-- Use element -->

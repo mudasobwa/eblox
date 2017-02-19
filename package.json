@@ -19,7 +19,6 @@
     "javascript-brunch": "~2.0.0",
     "Polymer": "~1.6.1",
     "npm-polymer-elements": "~0.0.1",
-    "websocket-component": "am-kantox/websocket-component",
     "polymer-brunch": "overminddl1/polymer-brunch",
     "uglify-js-brunch": "~2.0.1"
   }
