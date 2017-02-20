@@ -1,0 +1,24 @@
+{
+  "name": "eblox",
+  "description": "Bower components (mostly Polymer and like) for Eblox",
+  "main": "",
+  "authors": [
+    "Aleksei Matiushkin <aleksei.matiushkin@kantox.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "eblox"
+  ],
+  "homepage": "https://github.com/mudasobwa/eblox",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer#^1.8.0"
+  }
+}
