@@ -1,14 +1,17 @@
 /* This file is for your main application css. */
 
+@import "materialize";
+@import "phoenix";
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Yanone Kaffeesatz", sanf-serif;
 }
 
-h6 { color: #b2dfdb; }
-h5 { color: #80cbc4; }
-h4 { color: #4db6ac; }
-h3 { color: #26a69a; }
-h2 { color: #009688; }
-h1 { color: #00897b; }
+h6 { color: color("teal", "lighten-2") }
+h5 { color: color("teal", "lighten-1") }
+h4 { color: color("teal", "darken-1") }
+h3 { color: color("teal", "darken-2") }
+h2 { color: color("teal", "darken-3"); }
+h1 { color: color("teal", "darken-4") }
 
 main { font-size: 128%; }

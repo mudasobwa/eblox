@@ -15,7 +15,7 @@
 
     <!-- wc -->
     <script type="text/javascript" src="<%= static_path(@conn, "/wc/webcomponentsjs/webcomponents-lite.min.js") %>"></script>
-    <link rel="import" href="<%= static_path(@conn, "/wc/leaflet-map/leaflet-map.html") %>">
+    <!--link rel="import" href="<%= static_path(@conn, "/wc/leaflet-map/leaflet-map.html") %>"-->
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
@@ -39,10 +39,14 @@
     <div class="container">
       <div class="section">
         <!-- Use element -->
-        <google-map latitude="37.790" longitude="-122.390"></google-map>
+        <!--google-map latitude="37.790" longitude="-122.390"></google-map-->
 
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <%= if get_flash(@conn, :info) do %>
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= if get_flash(@conn, :error) do %>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
       </div>
     </div>
 
@@ -51,6 +55,7 @@
         <div class="row">
           <div class="col s12 m12">
             <main role="main">
+              <%= inspect assigns[:conn].path_info %>
               <%= render @view_module, @view_template, assigns %>
             </main>
           </div>
