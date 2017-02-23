@@ -35,6 +35,9 @@ defmodule Eblox.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
 
+     {:edeliver, "~> 1.4.0"},
+     {:distillery, "~> 1.0"},
+
      {:xml_builder, "~> 0.0"},
      {:markright, "~> 0.1"},
    ]

@@ -1,0 +1,50 @@
+# .deliver/config
+
+alias ssh="ssh -i /home/am/.ssh/amotion-mudasobwa.pem"
+
+APP="eblox"
+
+BUILD_CMD=mix
+RELEASE_CMD=mix
+USING_DISTILLERY=true
+AUTO_VERSION=commit-count+git-revision+branch-unless-master
+# GIT_CLEAN_PATHS="_build rel priv/generated"
+
+RELEASE_STORE="ubuntu@ec2-35-161-94-153.us-west-2.compute.amazonaws.com:/otp/release/$APP/tar.gz"
+
+BUILD_HOST="ec2-35-161-94-153.us-west-2.compute.amazonaws.com"
+BUILD_USER="eblox"
+BUILD_AT="/otp/build/$APP"
+REL_DIR="$BUILD_AT/rel"
+RELEASE_DIR="$REL_DIR/$APP"
+
+LINK_VM_ARGS="$BUILD_AT/rel/vm.args"
+
+STAGING_HOSTS="ec2-35-161-94-153.us-west-2.compute.amazonaws.com"
+STAGING_USER="ubuntu"
+
+PRODUCTION_HOSTS="ec2-35-161-94-153.us-west-2.compute.amazonaws.com"
+PRODUCTION_USER="ubuntu"
+
+DELIVER_TO="/otp/release"
+
+# For *Phoenix* projects, symlink prod.secret.exs to our tmp source
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/otp/.secrets/eblox/config/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
+
+# Fix
+# ==> Upgrade from 0.0.3+71-7a01b46 to 0.0.4+87-6c98597 failed:
+#  0.0.3+71-7a01b46 does not exist at _build/prod/rel/eblox/releases/0.0.3+71-7a01b46
+pre_erlang_generate_release() {
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$REL_DIR' '$BUILD_AT/_build/prod/'
+    "
+  fi
+}
