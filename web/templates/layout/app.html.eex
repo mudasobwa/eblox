@@ -4,25 +4,34 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="<%= @description %>">
+    <meta name="author" content="<%= @author %>">
 
-    <title>Hello Eblox!</title>
+    <title><%= @title %></title>
 
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arsenal:400,700|Roboto:400,700|Marmelad|Yanone+Kaffeesatz:400,700&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 
+    <link rel="prev" title="<%= @prev_title %>" href="<%= @prev_link %>">
+    <link rel="next" title="<%= @next_title %>" href="<%= @next_link %>">
+
     <!-- wc -->
     <script type="text/javascript" src="<%= static_path(@conn, "/wc/webcomponentsjs/webcomponents-lite.min.js") %>"></script>
     <!--link rel="import" href="<%= static_path(@conn, "/wc/leaflet-map/leaflet-map.html") %>"-->
+
+    <!--link rel="stylesheet" type="text/css" href="../src/assets/spn.css">
+    <script type="text/javascript" src="../src/js/spn.js"></script -->
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <nav class="teal darken-4" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="mailto:am@mudasobwa.ru" class="brand-logo">
+          <img src="/images/avatar.jpg" alt="Aleksei “mudasobwa” Matiushkin" class="circle responsive-img">
+        </a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Navbar Link</a></li>
         </ul>
@@ -55,7 +64,6 @@
         <div class="row">
           <div class="col s12 m12">
             <main role="main">
-              <%= inspect assigns[:conn].path_info %>
               <%= render @view_module, @view_template, assigns %>
             </main>
           </div>

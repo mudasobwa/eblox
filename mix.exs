@@ -39,7 +39,7 @@ defmodule Eblox.Mixfile do
      {:distillery, "~> 1.0"},
 
      {:xml_builder, "~> 0.0"},
-     {:markright, "~> 0.1"},
+     {:markright, "~> 0.2"},
    ]
   end
 end
