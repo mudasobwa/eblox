@@ -25,7 +25,8 @@ defmodule Eblox.PageController do
     parse(conn, conn.path_info)
   end
 
-  defp parse(conn, path) do
+  defp parse(conn, []), do: parse(conn, [nil])
+  defp parse(conn, path) when is_list(path) do
     Logger.debug "Path: “#{inspect path}”"
     with [path | _collection] <- :lists.reverse(path),
          links <- Eblox.GenEblox.get(path),
