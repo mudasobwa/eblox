@@ -1,7 +1,7 @@
-defmodule Eblox.Endpoint do
+defmodule Eblox.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :eblox
 
-  socket "/socket", Eblox.UserSocket
+  socket "/socket", Eblox.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule Eblox.Endpoint do
     key: "_eblox_key",
     signing_salt: "BKNuPEPW"
 
-  plug Eblox.Router
+  plug Eblox.Web.Router
 end

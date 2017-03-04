@@ -1,4 +1,4 @@
-defmodule Eblox.Router do
+defmodule Eblox.Web.Router do
   use Eblox.Web, :router
 
   pipeline :browser do
@@ -13,7 +13,7 @@ defmodule Eblox.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Eblox do
+  scope "/", Eblox.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/*path", PageController, :index

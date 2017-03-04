@@ -1,4 +1,4 @@
-defmodule Eblox.ChannelCase do
+defmodule Eblox.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -22,7 +22,7 @@ defmodule Eblox.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint Eblox.Endpoint
+      @endpoint Eblox.Web.Endpoint
     end
   end
 

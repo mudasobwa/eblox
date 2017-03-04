@@ -24,26 +24,25 @@ defmodule Eblox.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
+      use Phoenix.Controller, namespace: Eblox.Web
 
-      import Eblox.Router.Helpers
-      import Eblox.Gettext
+      import Eblox.Web.Router.Helpers
+      import Eblox.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
-
+      use Phoenix.View, root: "lib/eblox/web/templates", namespace: Eblox.Web
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Eblox.Router.Helpers
-      import Eblox.ErrorHelpers
-      import Eblox.Gettext
+      import Eblox.Web.Router.Helpers
+      import Eblox.Web.ErrorHelpers
+      import Eblox.Web.Gettext
     end
   end
 
@@ -56,7 +55,7 @@ defmodule Eblox.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import Eblox.Gettext
+      import Eblox.Web.Gettext
     end
   end
 

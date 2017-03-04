@@ -6,10 +6,10 @@
 use Mix.Config
 
 # Configures the endpoint
-config :eblox, Eblox.Endpoint,
+config :eblox, Eblox.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "s/mRgMjmyNXrdLQDFhCaqztfJGTRta5MUkBQw0tBrFRnd0JJDa5spjF+UyJrzDFk",
-  render_errors: [view: Eblox.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: Eblox.Web.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Eblox.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

@@ -1,4 +1,4 @@
-defmodule Eblox.ConnCase do
+defmodule Eblox.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,10 +20,10 @@ defmodule Eblox.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      import Eblox.Router.Helpers
+      import Eblox.Web.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Eblox.Endpoint
+      @endpoint Eblox.Web.Endpoint
     end
   end
 

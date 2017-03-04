@@ -1,3 +1,3 @@
 defmodule Eblox.PageViewTest do
-  use Eblox.ConnCase, async: true
+  use Eblox.Web.ConnCase, async: true
 end

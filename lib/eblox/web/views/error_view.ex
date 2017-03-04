@@ -1,4 +1,4 @@
-defmodule Eblox.ErrorView do
+defmodule Eblox.Web.ErrorView do
   use Eblox.Web, :view
 
   def render("404.html", _assigns) do

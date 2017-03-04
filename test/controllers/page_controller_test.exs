@@ -1,5 +1,5 @@
 defmodule Eblox.PageControllerTest do
-  use Eblox.ConnCase
+  use Eblox.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

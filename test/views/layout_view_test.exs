@@ -1,3 +1,3 @@
 defmodule Eblox.LayoutViewTest do
-  use Eblox.ConnCase, async: true
+  use Eblox.Web.ConnCase, async: true
 end

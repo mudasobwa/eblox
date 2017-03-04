@@ -1,4 +1,4 @@
-defmodule Eblox.PageController do
+defmodule Eblox.Web.PageController do
   use Eblox.Web, :controller
   require Logger
 

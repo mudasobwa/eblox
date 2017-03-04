@@ -23,7 +23,7 @@ exports.config = {
       order: {
         after: [
           "node_modules/spn/src/assets/spn.css",
-          "web/static/css/app.css"
+          "css/app.css"
         ] // concat app.css last
       }
     },
@@ -36,26 +36,23 @@ exports.config = {
     // This option sets where we should place non-css and non-js assets in.
     // By default, we set this to "/web/static/assets". Files in this directory
     // will be copied to `paths.public`, which is "priv/static" by default.
-    assets: /^(web\/static\/assets)/
+    assets: /^(static)/
   },
 
   // Phoenix paths configuration
   paths: {
     // Dependencies and current project directories to watch
-    watched: [
-      "web/static",
-      "test/static"
-    ],
+    watched: ["static", "css", "js", "vendor"],
 
     // Where to compile files to
-    public: "priv/static"
+    public: "../priv/static"
   },
 
   // Configure your plugins
   plugins: {
     babel: {
       // Do not use ES6 compiler in vendor code
-      ignore: [/web\/static\/vendor/]
+      ignore: [/vendor/]
     },
     sass: {
       options: {
@@ -69,7 +66,7 @@ exports.config = {
     polymer: {
       vulcanize: { // A top-level vulcanize is the 'default' path for files that do not match any in 'paths'.
         options: { // These are normal vulcanize options passed as-is.
-          abspath: "web/static/_wc",
+          abspath: "_wc",
           stripComments: true
         }
       },
@@ -110,7 +107,7 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      "js/app.js": ["js/app"]
     }
   },
 

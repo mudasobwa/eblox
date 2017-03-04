@@ -1,4 +1,4 @@
-defmodule Eblox.UserSocket do
+defmodule Eblox.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels

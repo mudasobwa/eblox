@@ -1,4 +1,4 @@
-defmodule Eblox.ErrorHelpers do
+defmodule Eblox.Web.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
