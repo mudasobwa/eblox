@@ -3,8 +3,8 @@ defmodule Eblox.Mixfile do
 
   def project do
     [app: :eblox,
-     version: "0.0.1",
-     elixir: "~> 1.2",
+     version: "0.0.2",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -39,7 +39,7 @@ defmodule Eblox.Mixfile do
      {:distillery, "~> 1.0"},
 
      {:xml_builder, "~> 0.0"},
-     {:markright, "~> 0.2"},
+     {:markright, "~> 0.3"},
    ]
   end
 end
