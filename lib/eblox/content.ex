@@ -43,14 +43,15 @@ defmodule Eblox.Content do
   def new(file, list) do
     with {timestamp, _} <- to_date_number(file),
          raw <- File.read!(Path.join(Eblox.GenEblox.content_dir, file)),
-         {ast, acc} <- Markright.to_ast(raw, Eblox.Markright.Collector),
+         {ast, collected} <- Markright.to_ast(raw, Eblox.Markright.Collector),
          html <- XmlBuilder.generate(ast) do
       %Eblox.Content{
+        type: collected[Markright.Collectors.Type],
         raw: raw,
         timestamp: timestamp,
         ast: ast,
         html: html,
-        meta: acc,
+        meta: collected,
         nav: Eblox.Content.Nav.new(list, file)}
     else
       _ -> nil

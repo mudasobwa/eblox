@@ -1,4 +1,8 @@
 <div class="row marketing">
+  <%= inspect(@content) %>
+</div>
+
+<div class="row marketing">
   <%= raw @content.html %>
 </div>
 

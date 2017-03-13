@@ -9,8 +9,6 @@ defmodule Eblox.Web.PageController do
   end
 
   defp generic_route(conn, _opts) do
-    Logger.info inspect(conn.path_info)
-    # assign(conn, :user, user)
     conn
     |> put_flash(:info, "You must be logged in")
     |> assign(:title, "Hello EBLOX")
@@ -27,7 +25,6 @@ defmodule Eblox.Web.PageController do
 
   defp parse(conn, []), do: parse(conn, [nil])
   defp parse(conn, path) when is_list(path) do
-    Logger.debug "Path: “#{inspect path}”"
     with [path | _collection] <- :lists.reverse(path),
          %Eblox.Content{} = content <- Eblox.GenEblox.get(path) do
       assign(conn, :content, content)

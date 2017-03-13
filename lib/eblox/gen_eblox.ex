@@ -74,8 +74,6 @@ defmodule Eblox.GenEblox do
     |> Enum.reduce(%{}, &Map.put(&2, &1, nil))
     |> Map.delete(@cache)
     |> Map.delete(@git)
-#    |> Enum.sort(fn {k1, _}, {k2, _} -> k2 <= k1 end)
-#    |> Enum.into(%{})
   end
 
   # FIXME CACHE!!!
