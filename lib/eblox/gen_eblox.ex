@@ -6,11 +6,10 @@ defmodule Eblox.GenEblox do
 
   @content "content"
 
-  @cache Path.join @content, ".eblox"
-  @collections Path.join @cache, "collections"
-
-  # FIXME FIXME FIXME CACHE CACHE CACHE
-  @everything Path.join @collections, "everything"
+  @git ".git"
+  # @git_dir Path.join @content, @git
+  @cache ".eblox"
+  @cache_dir Path.join @content, @cache
 
   ##############################################################################
   ### GenStage stuff
@@ -28,8 +27,11 @@ defmodule Eblox.GenEblox do
 
   def reset, do:  GenServer.cast(__MODULE__, :reset)
 
-  def get(key \\ nil),
-    do:  GenServer.call(__MODULE__, {:get, key})
+  def collection, do: GenServer.call(__MODULE__, :collection)
+
+  def get(key \\ nil), do:  GenServer.call(__MODULE__, {:get, key})
+
+  def content_dir, do: @content
 
   ##############################################################################
 
@@ -38,9 +40,21 @@ defmodule Eblox.GenEblox do
   @doc false
   def handle_cast(:reset, _state), do: {:noreply, eblox_init!()}
 
+  @doc """
+  Returns map `%{file => %Eblox.Content{}}`
+  """
+  def handle_call(:collection, _from, state), do: {:reply, state[:collection], state}
+
   @doc false
   def handle_call({:get, key}, _from, state) do
-    {:reply, prev_this_next(state[:everything], key), state}
+    case content(state[:collection], key) do
+      {:new, normalized_key, data} ->
+        collection = %{state[:collection] | normalized_key => data}
+        state = Keyword.update!(state, :collection, fn _ -> collection end)
+        {:reply, data, state}
+      {:existing, _, data} ->
+        {:reply, data, state}
+    end
   end
 
   ##############################################################################
@@ -48,32 +62,45 @@ defmodule Eblox.GenEblox do
   ## Helpers (initialize)
 
   defp eblox_init!(initial \\ []) do
-    File.mkdir_p!(@cache)
+    File.mkdir_p!(@cache_dir)
 
     initial
-    |> Keyword.merge([everything: everything()])
+    |> Keyword.merge([collection: collection_init!()])
   end
 
-  defp everything do
+  defp collection_init! do
     @content
     |> File.cd!(&File.ls!/0)
-    |> Enum.sort
-    |> :lists.reverse
+    |> Enum.reduce(%{}, &Map.put(&2, &1, nil))
+    |> Map.delete(@cache)
+    |> Map.delete(@git)
+#    |> Enum.sort(fn {k1, _}, {k2, _} -> k2 <= k1 end)
+#    |> Enum.into(%{})
   end
 
   # FIXME CACHE!!!
-  defp prev_this_next(list, key, acc \\ nil)
-  defp prev_this_next([], _key, _acc), do: nil
-  defp prev_this_next([h | _] = list, nil, _acc), do: prev_this_next(list, h)
-  defp prev_this_next([h | t], key, acc) do
-    case h do
-      ^key ->
-        next = case t do
-                 [] -> nil
-                 [th | _] -> th
-               end
-        [prev: acc, this: key, next: next, path: Path.join(@content, key)]
-      prev -> prev_this_next(t, key, prev)
+
+  defp normalize(key) do
+    key # FIXME
+  end
+
+  defp sorted_keys(map) do
+    map
+    |> Map.keys()
+    |> Enum.sort_by(&Eblox.Content.to_date_number/1, fn {d1, n1}, {d2, n2} ->
+          case Date.compare(d1, d2) do
+            :lt -> false
+            :gt -> true
+            _   -> n1 > n2
+          end
+    end)
+  end
+  defp content(map, nil), do: content(map, map |> sorted_keys() |> List.first())
+  defp content(map, key) do
+    with key <- normalize(key), nil <- map[key] do
+      {:new, key, Eblox.Content.new(key, sorted_keys(map))}
+    else
+      data -> {:existing, key, data}
     end
   end
 

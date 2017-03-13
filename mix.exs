@@ -40,6 +40,9 @@ defmodule Eblox.Mixfile do
 
      {:xml_builder, "~> 0.0"},
      {:markright, "~> 0.3"},
+
+     {:credo, "~> 0.5", only: :dev},
+     {:ex_doc, "~> 0.11", only: :dev},
    ]
   end
 end

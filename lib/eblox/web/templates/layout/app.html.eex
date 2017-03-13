@@ -13,8 +13,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arsenal:400,700|Roboto:400,700|Marmelad|Yanone+Kaffeesatz:400,700&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 
-    <link rel="prev" title="<%= @prev_title %>" href="<%= @prev_link %>">
-    <link rel="next" title="<%= @next_title %>" href="<%= @next_link %>">
+    <link rel="prev" title="<%= @prev_title %>" href="<%= @content.nav.prev %>">
+    <link rel="next" title="<%= @next_title %>" href="<%= @content.nav.next %>">
 
     <!-- wc -->
     <script type="text/javascript" src="<%= static_path(@conn, "/wc/webcomponentsjs/webcomponents-lite.min.js") %>"></script>
@@ -142,25 +142,6 @@
         </div>
       </div>
     </footer>
-
-    <!--div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

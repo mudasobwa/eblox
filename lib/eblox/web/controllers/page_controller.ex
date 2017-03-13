@@ -29,13 +29,8 @@ defmodule Eblox.Web.PageController do
   defp parse(conn, path) when is_list(path) do
     Logger.debug "Path: “#{inspect path}”"
     with [path | _collection] <- :lists.reverse(path),
-         links <- Eblox.GenEblox.get(path),
-         {ast, acc} <- (links[:path] |> File.read! |> Markright.to_ast(Eblox.Markright.Collector)) do
-      conn
-      |> assign(:prev_link, links[:prev])
-      |> assign(:next_link, links[:next])
-      |> assign(:acc, acc)
-      |> assign(:content, XmlBuilder.generate(ast))
+         %Eblox.Content{} = content <- Eblox.GenEblox.get(path) do
+      assign(conn, :content, content)
     end
   end
 end
