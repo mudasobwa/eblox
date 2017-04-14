@@ -29,8 +29,8 @@
   <body>
     <nav class="teal darken-4" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="mailto:am@mudasobwa.ru" class="brand-logo">
-          <img src="/images/avatar.jpg" alt="Aleksei “mudasobwa” Matiushkin" class="circle responsive-img">
+        <a id="logo-container" href="mailto:am@mudasobwa.ru">
+          <img src="/images/avatar.jpg" alt="Aleksei “mudasobwa” Matiushkin" class="circle responsive-img brand-logo">
         </a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Navbar Link</a></li>

@@ -28,8 +28,9 @@ defmodule Eblox.GenEblox do
   def reset, do:  GenServer.cast(__MODULE__, :reset)
 
   def collection, do: GenServer.call(__MODULE__, :collection)
+  def static_pages, do: GenServer.call(__MODULE__, :static_pages)
 
-  def get(key \\ nil), do:  GenServer.call(__MODULE__, {:get, key})
+  def get(key \\ nil, type \\ :collection), do:  GenServer.call(__MODULE__, {:get, key, type})
 
   def content_dir, do: @content
 
@@ -44,13 +45,14 @@ defmodule Eblox.GenEblox do
   Returns map `%{file => %Eblox.Content{}}`
   """
   def handle_call(:collection, _from, state), do: {:reply, state[:collection], state}
+  def handle_call(:static_pages, _from, state), do: {:reply, state[:static_pages], state}
 
   @doc false
-  def handle_call({:get, key}, _from, state) do
-    case content(state[:collection], key) do
+  def handle_call({:get, key, type}, _from, state) do
+    case content(type, state[type], key) do
       {:new, normalized_key, data} ->
-        collection = %{state[:collection] | normalized_key => data}
-        state = Keyword.update!(state, :collection, fn _ -> collection end)
+        collection = %{state[type] | normalized_key => data}
+        state = Keyword.update!(state, type, fn _ -> collection end)
         {:reply, data, state}
       {:existing, _, data} ->
         {:reply, data, state}
@@ -64,28 +66,46 @@ defmodule Eblox.GenEblox do
   defp eblox_init!(initial \\ []) do
     File.mkdir_p!(@cache_dir)
 
-    initial
-    |> Keyword.merge([collection: collection_init!()])
+    Keyword.merge(initial, [
+      collection: collection_init!(),
+      static_pages: static_pages_init!()])
+  end
+
+  defp content_init!(filter) do
+    @content
+    |> File.cd!(&File.ls!/0)
+    |> List.delete(@cache)
+    |> List.delete(@git)
+    |> Enum.filter(filter)
+    |> Enum.reduce(%{}, &Map.put(&2, &1, nil))
   end
 
   defp collection_init! do
-    @content
-    |> File.cd!(&File.ls!/0)
-    |> Enum.reduce(%{}, &Map.put(&2, &1, nil))
-    |> Map.delete(@cache)
-    |> Map.delete(@git)
+    content_init!(fn file ->
+      case Eblox.Content.to_date_number(file) do
+        {nil, nil} -> false
+        _ -> true
+      end
+    end)
   end
 
-  # FIXME CACHE!!!
+  defp static_pages_init! do
+    content_init!(fn file ->
+      case Eblox.Content.to_date_number(file) do
+        {nil, nil} -> true
+        _ -> false
+      end
+    end)
+  end
 
   defp normalize(key) do
     key # FIXME
   end
 
-  defp sorted_keys(map) do
+  defp sorted_keys(map, mapper) do
     map
     |> Map.keys()
-    |> Enum.sort_by(&Eblox.Content.to_date_number/1, fn {d1, n1}, {d2, n2} ->
+    |> Enum.sort_by(mapper, fn {d1, n1}, {d2, n2} ->
           case Date.compare(d1, d2) do
             :lt -> false
             :gt -> true
@@ -93,10 +113,16 @@ defmodule Eblox.GenEblox do
           end
     end)
   end
-  defp content(map, nil), do: content(map, map |> sorted_keys() |> List.first())
-  defp content(map, key) do
+
+  @type_to_mapper [
+    collection:   &Eblox.Content.to_date_number/1,
+    static_pages: &Eblox.Content.to_number_text/1
+  ]
+  defp content(type, map, nil),
+    do: content(type, map, map |> sorted_keys(@type_to_mapper[type]) |> List.first())
+  defp content(type, map, key) do
     with key <- normalize(key), nil <- map[key] do
-      {:new, key, Eblox.Content.new(key, sorted_keys(map))}
+      {:new, key, Eblox.Content.new(key, sorted_keys(map, @type_to_mapper[type]))}
     else
       data -> {:existing, key, data}
     end

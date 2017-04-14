@@ -90,7 +90,8 @@ defmodule Eblox.Content do
 
 
   """
-  def to_date_number(file) do
+  # def to_date_number({file, _}), do: to_date_number(file) # helper for sorting map in GenEblox
+  def to_date_number(file) when is_binary(file) do
     case Regex.scan(~r/(\d{4})\D(\d{1,2})\D(\d{1,2})(?:\D(\d{1,}))?/, file, capture: :all_but_first) do
       [] ->
         # not a date
@@ -108,5 +109,10 @@ defmodule Eblox.Content do
                            |> Date.from_erl()
         {timestamp, String.to_integer(number)}
     end
+  end
+
+  def to_number_text(file) when is_binary(file) do
+    with [[num, text]] <- Regex.scan(~r/\A(\d*)(.*)\z/, file, capture: :all_but_first),
+      do: {num, text}
   end
 end
