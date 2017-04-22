@@ -4,6 +4,10 @@ defmodule Eblox.Web.PageController do
 
   plug :generic_route
 
+  @title Application.get_env(:eblox, :title, "Ebl❤x")
+  @description Application.get_env(:eblox, :description, "Ebl❤x")
+  @author Application.get_env(:eblox, :author, "Aleksei Matiushkin")
+
   def index(conn, _params) do
     render conn, "index.html"
   end
@@ -11,9 +15,9 @@ defmodule Eblox.Web.PageController do
   defp generic_route(conn, _opts) do
     conn
     |> put_flash(:info, "You must be logged in")
-    |> assign(:title, "Hello EBLOX")
-    |> assign(:description, "Hello EBLOX")
-    |> assign(:author, "Aleksei Matiushkin")
+    |> assign(:title, @title)
+    |> assign(:description, @description)
+    |> assign(:author, @author)
     |> assign(:prev_title, "⇐")
     |> assign(:next_title, "⇒")
     |> prepare
