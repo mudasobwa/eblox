@@ -14,7 +14,7 @@ defmodule Eblox.Web.PageController do
 
   defp generic_route(conn, _opts) do
     conn
-    |> put_flash(:info, "You must be logged in")
+    # TODO |> put_flash(:info, "You must be logged in")
     |> assign(:title, @title)
     |> assign(:description, @description)
     |> assign(:author, @author)

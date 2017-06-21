@@ -7,7 +7,25 @@
 </div>
 
 <div class="row">
-  <div class="col s1"><a href="<%= @content.nav.prev %>"><%= @prev_title %></a></div>
-  <div class="col s10"></div>
-  <div class="col s1"><a href="<%= @content.nav.next %>"><%= @next_title %></a></div>
+  <div class="col s12 m12 center">
+    <%= if @content.nav.prev do %>
+      <a class="btn btn-floating teal"
+         href="<%= @content.nav.prev %>"
+         title="<%= @prev_title %>"><i class="material-icons medium"><%= @prev_title %></i></a>
+    <% else %>
+      <a class="btn btn-floating disabled"><i class="material-icons medium">⇐</i></a>
+    <% end %>
+    &nbsp;&nbsp;&nbsp;
+    <a class="btn btn-floating teal"
+       href="/"
+       title="🏠"><i class="material-icons medium">🏠</i></a>
+    &nbsp;&nbsp;&nbsp;
+    <%= if @content.nav.next do %>
+      <a class="btn btn-floating teal"
+         href="<%= @content.nav.next %>"
+         title="<%= @next_title %>"><i class="material-icons medium"><%= @next_title %></i></a>
+    <% else %>
+      <a class="btn btn-floating disabled"><i class="material-icons medium">⇒</i></a>
+    <% end %>
+  </div>
 </div>

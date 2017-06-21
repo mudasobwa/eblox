@@ -1,4 +1,6 @@
 defmodule Eblox.Content.Nav do
+  @moduledoc false
+
   @typedoc """
   Navigation as by web page navigation.
   """
@@ -7,23 +9,20 @@ defmodule Eblox.Content.Nav do
   def fields, do: @fields
   defstruct @fields
 
-  def new(list, key, acc \\ nil)
-  def new([], _key, _acc), do: nil
-  def new([h | _] = list, nil, _acc), do: new(list, h)
-  def new([h | t], key, acc) do
-    case h do
-      ^key ->
-        next = case t do
-                 [] -> nil
-                 [th | _] -> th
-               end
-        %Eblox.Content.Nav{prev: acc, this: key, next: next}
-      prev -> new(t, key, prev)
-    end
+  @spec new(List.t, String.t, String.t) :: Eblox.Content.Nav.t
+  def new(list, key, next \\ nil)
+  def new([], _key, _next), do: nil
+  def new([key], key, _next), do: nil
+  def new([h | _] = list, nil, _next), do: new(list, h)
+  def new([key | [prev | _]], key, next) do
+    %Eblox.Content.Nav{prev: prev, this: key, next: next}
   end
+  def new([next | t], key, _next), do: new(t, key, next)
 end
 
 defmodule Eblox.Content do
+  @moduledoc false
+
   @typedoc """
   Content is the whole lazily cached content of the blog.
   """
@@ -40,10 +39,14 @@ defmodule Eblox.Content do
   def fields, do: @fields
   defstruct @fields
 
+  require Logger
+
+  @spec new(String.t, List.t) :: Eblox.Content.t
   def new(file, list) do
     with {timestamp, _} <- to_date_number(file),
          raw <- File.read!(Path.join(Eblox.GenEblox.content_dir, file)),
          {ast, collected} <- Markright.to_ast(raw, Eblox.Markright.Collector),
+         ast <- fuererize(ast, collected[Markright.Collectors.Fuerer]),
          html <- XmlBuilder.generate(ast) do
       %Eblox.Content{
         type: collected[Markright.Collectors.Type],
@@ -58,6 +61,12 @@ defmodule Eblox.Content do
     end
   end
 
+  @spec fuererize({:article, Map.t, List.t}, Keyword.t) :: {:article, Map.t, List.t}
+  defp fuererize({:article, %{}, [{:p, %{}, title} | rest]}, {:h2, %{}, title}),
+    do: {:article, %{}, [{:h2, %{}, title} | rest]}
+  defp fuererize(ast, _), do: ast
+
+  @spec to_date_number(String.t) :: {Date.t, Integer.t}
   @doc """
   Converts any arbitrary file name to a tuple `{Date.t, Integer.t}`.
   Used for sorting the entries as well as for extracting the date from the url.
@@ -111,6 +120,7 @@ defmodule Eblox.Content do
     end
   end
 
+  @spec to_number_text(String.t) :: {Integer.t, String.t}
   def to_number_text(file) when is_binary(file) do
     with [[num, text]] <- Regex.scan(~r/\A(\d*)(.*)\z/, file, capture: :all_but_first),
       do: {num, text}
