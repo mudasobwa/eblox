@@ -76,32 +76,21 @@
 
         <!--   Icon Section   -->
         <div class="row">
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center teal-text darken-4"><i class="material-icons">flash_on</i></h2>
-              <h5 class="center">Speeds up development</h5>
-
-              <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          <%= for thumbnail <- @thumbnails do %>
+            <div class="col s12 m4">
+              <div class="icon-block">
+                <h2 class="center teal-text darken-4"><i class="material-icons">flash_on</i></h2>
+                <h5 class="center"><a href="<%= thumbnail.nav.this %>"><%= thumbnail.title %></a></h5>
+                <div class="thumbnail-container overflow-hidden">
+                    <div class="thumbnail-contents">
+                      <%= raw thumbnail.preview_html %>
+                    </div>
+                    <div class="thumbnail-gradient">
+                    </div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center teal-text darken-4"><i class="material-icons">group</i></h2>
-              <h5 class="center">User Experience Focused</h5>
-
-              <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-            </div>
-          </div>
-
-          <div class="col s12 m4">
-            <div class="icon-block">
-              <h2 class="center teal-text darken-4"><i class="material-icons">settings</i></h2>
-              <h5 class="center">Easy to work with</h5>
-
-              <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-            </div>
-          </div>
+          <% end %>
         </div>
 
       </div>
@@ -111,34 +100,57 @@
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
+            <h5 class="white-text">Пара слов:</h5>
+            <p class="grey-text text-lighten-4">
+              Звать: <b>Алексей Матюшкин</b> (в сети: <b>mudasobwa</b>).<br>
+              Вкратце: Я все еще <b>функциональнее</b>, чем <b>ориетированнее</b>.<br>
+              Рожден: <b>0-го Октября, 1973</b>, в <b>Ленинграде</b>.<br>
+              Живал: <b>Ленинград</b> ⇒ <b>Ираклеон</b> ⇒ <b>Берлин</b> ⇒ <b>Москва</b> ⇒ <b>Барселона</b>.<br>
+              Люблю: <b>Linux</b>, <b>чиримойю</b>, <b>рассветы</b>, <b>виски</b>, <b>спорить</b>.<br>
+              Ненавижу: <b>MacOS</b>, <b>папайю</b>, <b>вечера</b>, <b>шампанское</b>, <b>ненавистников</b>.
+            </p>
           </div>
           <div class="col l3 s12">
-            <h5 class="white-text">Settings</h5>
+            <h5 class="white-text">Пишу по работе:</h5>
             <ul>
-              <li><a class="white-text" href="#!">Link 1</a></li>
-              <li><a class="white-text" href="#!">Link 2</a></li>
-              <li><a class="white-text" href="#!">Link 3</a></li>
-              <li><a class="white-text" href="#!">Link 4</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru/fun/2013/04/06/abc-for-fluent-speakers-nm-level">ABC for Fluent Speakers</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru/hacking/2017/04/24/git-commit-credo-linter-hook">Use credo in git pre-commit</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru/hacking/2017/03/08/hack-vs-kludge">Hack vs. Kludge</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru/hacking/2017/02/17/either-monad-in-elixir">Either Monad in Elixir</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru/hobby/2016/12/25/queso-al-romero">Queso as Romero</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru/hacking/2016/12/19/dry-behaviour">Protocols in Ruby</a></li>
             </ul>
           </div>
           <div class="col l3 s12">
-            <h5 class="white-text">Connect</h5>
+            <h5 class="white-text">Пароли и явки</h5>
             <ul>
-              <li><a class="white-text" href="#!">Link 1</a></li>
-              <li><a class="white-text" href="#!">Link 2</a></li>
-              <li><a class="white-text" href="#!">Link 3</a></li>
-              <li><a class="white-text" href="#!">Link 4</a></li>
+              <li><a class="white-text" href="mailto:am@mudasobwa.ru">am@mudasobwa.ru</a></li>
+              <li><a class="white-text" href="https://github.com/am-kantox">git @kantox</a></li>
+              <li><a class="white-text" href="https://github.com/mudasobwa">git @home</a></li>
+              <li><a class="white-text" href="http://stackoverflow.com/users/story/2035262">story @stackoverflow</a></li>
+              <li><a class="white-text" href="https://twitter.com/mudasobwa">twitter</a></li>
+              <li><a class="white-text" href="http://rocket-science.ru">рабочий блог</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-copyright">
-        <div class="container">
-        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        <div class="container teal-text text-lighten-3">
+          <strong>
+            <a class="teal-text text-lighten-5" href="http://creativecommons.org/licenses/by/3.0/deed">CC BY 3.0</a> <code>::</code>
+            доктрина: строю метамодели <code>::</code>
+            <a class="teal-text text-lighten-5" href="http://rocket-science.ru/files/alexei-matyushkin.pdf">résumé</a> <code>::</code>
+            национальность: энтропиец <code>::</code>
+            <a class="teal-text text-lighten-5" href='mailto:am@mudasobwa.ru'>am@mudasobwa.ru</a> <code>::</code>
+            рожден: 0 октября <code>::</code>
+            <a class="teal-text text-lighten-5" href="http://feeds.feedburner.com/">RSS Feed</a> <code>::</code>
+            ❤ <code>::</code>
+            <a class="teal-text text-lighten-5" href="http://materializecss.com">materializecss</a>
+          </strong>
+          <!--
+          <a href="http://github.com/{{ site.author.github }}/">github.com/{{ site.author.github }}</a><br />
+          <a href="http://twitter.com/{{ site.author.twitter }}/">twitter.com/{{ site.author.twitter }}</a><br />
+          -->
         </div>
       </div>
     </footer>

@@ -30,12 +30,22 @@ defmodule Eblox.Content do
     type: Atom.t,
     timestamp: Date.t,
     raw: String.t,
+    title: String.t,
     ast: tuple,
+    preview_html: String.t,
     html: String.t,
     meta: List.t,
     nav: Nav.t}
 
-  @fields [type: :unknown, timestamp: Date.utc_today(), raw: nil, ast: {}, html: nil, meta: [], nav: %Eblox.Content.Nav{}]
+  @fields [type: :unknown,
+           timestamp: Date.utc_today(),
+           raw: nil,
+           title: nil,
+           ast: {},
+           html: nil,
+           preview_html: nil,
+           meta: [],
+           nav: %Eblox.Content.Nav{}]
   def fields, do: @fields
   defstruct @fields
 
@@ -46,14 +56,16 @@ defmodule Eblox.Content do
     with {timestamp, _} <- to_date_number(file),
          raw <- File.read!(Path.join(Eblox.GenEblox.content_dir, file)),
          {ast, collected} <- Markright.to_ast(raw, Eblox.Markright.Collector),
-         ast <- fuererize(ast, collected[Markright.Collectors.Fuerer]),
+         {title, ast} <- fuererize(ast, collected[Markright.Collectors.Fuerer]),
          html <- XmlBuilder.generate(ast) do
       %Eblox.Content{
         type: collected[Markright.Collectors.Type],
         raw: raw,
         timestamp: timestamp,
+        title: title,
         ast: ast,
         html: html,
+        preview_html: preview_html(ast),
         meta: collected,
         nav: Eblox.Content.Nav.new(list, file)}
     else
@@ -61,10 +73,29 @@ defmodule Eblox.Content do
     end
   end
 
+  @thumb_len 1024 * 1024
+  defp preview_html(ast) do
+    ast = with {:article, _, ast} <- ast do
+      {_, result} = Enum.reduce_while(ast, {"", []}, fn
+        {:p, _, text} = p, {all, acc} ->
+          all = all <> " " <> inspect(text)
+          if String.length(all) <= @thumb_len || [] == acc,
+            do: {:cont, {all, [p | acc]}}, else: {:halt, {all, acc}}
+        {:img, _, _} = img, {all, acc} ->
+          {:halt, {all, [img | acc]}}
+        _, acc -> {:cont, acc}
+      end)
+      :lists.reverse(result)
+    else
+      _ -> ""
+    end
+    XmlBuilder.generate(ast)
+  end
+
   @spec fuererize({:article, Map.t, List.t}, Keyword.t) :: {:article, Map.t, List.t}
   defp fuererize({:article, %{}, [{:p, %{}, title} | rest]}, {:h2, %{}, title}),
-    do: {:article, %{}, [{:h2, %{}, title} | rest]}
-  defp fuererize(ast, _), do: ast
+    do: {title, {:article, %{}, [{:h2, %{}, title} | rest]}}
+  defp fuererize(ast, _), do: {nil, ast}
 
   @spec to_date_number(String.t) :: {Date.t, Integer.t}
   @doc """

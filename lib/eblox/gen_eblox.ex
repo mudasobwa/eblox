@@ -31,6 +31,8 @@ defmodule Eblox.GenEblox do
   def static_pages, do: GenServer.call(__MODULE__, :static_pages)
 
   def get(key \\ nil, type \\ :collection), do:  GenServer.call(__MODULE__, {:get, key, type})
+  def random(count \\ 3, type \\ :collection, content_type \\ %{not: :twit}),
+    do:  GenServer.call(__MODULE__, {:random, count, type, content_type})
 
   def content_dir, do: @content
 
@@ -49,16 +51,16 @@ defmodule Eblox.GenEblox do
 
   @doc false
   def handle_call({:get, key, type}, _from, state) do
-    case content(type, state[type], key) do
-      {:new, normalized_key, data} ->
-        collection = %{state[type] | normalized_key => data}
-        state = Keyword.update!(state, type, fn _ -> collection end)
-        {:reply, data, state}
-      {:existing, _, data} ->
-        {:reply, data, state}
-    end
+    with {data, state} <- content!(type, state, key),
+      do: {:reply, data, state}
   end
 
+  @doc false
+  # {"2007-8-16-1", nil}, {"2010-6-23-2", nil}, {"2006-5-31-8", nil}
+  def handle_call({:random, count, type, content_type}, _from, state) do
+    {data, state} = random_of_type(count, type, content_type, {[], state})
+    {:reply, data, state}
+  end
   ##############################################################################
 
   ## Helpers (initialize)
@@ -98,6 +100,40 @@ defmodule Eblox.GenEblox do
     end)
   end
 
+  defp random_of_type(count, _, _, {data, state}) when count <= 0, do: {data, state}
+  defp random_of_type(count, type, content_type, {data, state}) do
+    {more, state} = state[type]
+                    |> Enum.take_random(count)
+                    |> Enum.map_reduce(state, fn {key, _}, acc ->
+                      content!(type, acc, key)
+                    end)
+    count = case Enum.filter(more, filter_by_content_type(content_type)) do
+              [] -> -1
+              some -> count - Enum.count(some)
+            end
+    random_of_type(count, type, content_type, {data ++ more, state})
+  end
+
+  defp filter_by_content_type(content_type) when is_function(content_type, 1),
+    do: content_type
+  defp filter_by_content_type(content_type) when is_atom(content_type),
+    do: filter_by_content_type([content_type])
+  defp filter_by_content_type(content_type) when is_list(content_type) do
+    fn %Eblox.Content{meta: meta} ->
+      Enum.member?(content_type, meta[Markright.Collectors.Type].type)
+    end
+  end
+  defp filter_by_content_type(%{only: content_type})
+    when is_atom(content_type) or is_list(content_type),
+    do: filter_by_content_type(content_type)
+  defp filter_by_content_type(%{not: content_type}) when is_atom(content_type),
+    do: filter_by_content_type(%{not: [content_type]})
+  defp filter_by_content_type(%{not: content_type}) when is_list(content_type) do
+    fn %Eblox.Content{meta: meta} ->
+      not Enum.member?(content_type, meta[Markright.Collectors.Type].type)
+    end
+  end
+
   defp normalize(key) do
     key # FIXME
   end
@@ -125,6 +161,17 @@ defmodule Eblox.GenEblox do
       {:new, key, Eblox.Content.new(key, sorted_keys(map, @type_to_mapper[type]))}
     else
       data -> {:existing, key, data}
+    end
+  end
+
+  defp content!(type, state, key) do
+    case content(type, state[type], key) do
+      {:new, normalized_key, data} ->
+        normalized_keys_collection = %{state[type] | normalized_key => data}
+        state = Keyword.update!(state, type, fn _ -> normalized_keys_collection end)
+        {data, state}
+      {:existing, _, data} ->
+        {data, state}
     end
   end
 

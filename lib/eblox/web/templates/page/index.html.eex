@@ -1,6 +1,6 @@
-<div class="row marketing">
+<!--div class="row marketing">
   <%= inspect(@content) %>
-</div>
+</div-->
 
 <div class="row marketing">
   <%= raw @content.html %>
@@ -11,21 +11,21 @@
     <%= if @content.nav.prev do %>
       <a class="btn btn-floating teal"
          href="<%= @content.nav.prev %>"
-         title="<%= @prev_title %>"><i class="material-icons medium"><%= @prev_title %></i></a>
+         title="<%= @prev_title %>"><i class="material-icons medium">skip_previous</i></a>
     <% else %>
-      <a class="btn btn-floating disabled"><i class="material-icons medium">⇐</i></a>
+      <a class="btn btn-floating disabled"><i class="material-icons medium">skip_previous</i></a>
     <% end %>
     &nbsp;&nbsp;&nbsp;
     <a class="btn btn-floating teal"
        href="/"
-       title="🏠"><i class="material-icons medium">🏠</i></a>
+       title="🏠"><i class="material-icons medium">toc</i></a>
     &nbsp;&nbsp;&nbsp;
     <%= if @content.nav.next do %>
       <a class="btn btn-floating teal"
          href="<%= @content.nav.next %>"
-         title="<%= @next_title %>"><i class="material-icons medium"><%= @next_title %></i></a>
+         title="<%= @next_title %>"><i class="material-icons medium">skip_next</i></a>
     <% else %>
-      <a class="btn btn-floating disabled"><i class="material-icons medium">⇒</i></a>
+      <a class="btn btn-floating disabled"><i class="material-icons medium">skip_next</i></a>
     <% end %>
   </div>
 </div>
