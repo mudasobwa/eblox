@@ -80,7 +80,7 @@
             <div class="col s12 m4">
               <div class="icon-block">
                 <h2 class="center teal-text darken-4"><i class="material-icons">flash_on</i></h2>
-                <h5 class="center"><a href="<%= thumbnail.nav.this %>"><%= thumbnail.title %></a></h5>
+                <h5 class="center"><a href="<%= thumbnail.nav.this %>"><%= raw thumbnail.title %></a></h5>
                 <div class="thumbnail-container overflow-hidden">
                     <div class="thumbnail-contents">
                       <%= raw thumbnail.preview_html %>

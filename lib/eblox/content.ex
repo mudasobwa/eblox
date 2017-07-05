@@ -94,7 +94,7 @@ defmodule Eblox.Content do
 
   @spec fuererize({:article, Map.t, List.t}, Keyword.t) :: {:article, Map.t, List.t}
   defp fuererize({:article, %{}, [{:p, %{}, title} | rest]}, {:h2, %{}, title}),
-    do: {title, {:article, %{}, [{:h2, %{}, title} | rest]}}
+    do: {XmlBuilder.generate(title), {:article, %{}, [{:h2, %{}, title} | rest]}}
   defp fuererize(ast, _), do: {nil, ast}
 
   @spec to_date_number(String.t) :: {Date.t, Integer.t}
