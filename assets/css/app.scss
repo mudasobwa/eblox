@@ -15,6 +15,11 @@ h2 { color: color("teal", "darken-3"); }
 h1 { color: color("teal", "darken-4") }
 
 main { font-size: 128%; }
+code {
+  padding: 0.2em 0.1em;
+  border: 1px solid #ced;
+  color: #698;
+}
 
 .overflow-hidden { overflow: hidden; height: 200px; }
 .footer-copyright { font-size: 76%; text-align: center; }

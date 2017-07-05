@@ -107,11 +107,9 @@ defmodule Eblox.GenEblox do
                     |> Enum.map_reduce(state, fn {key, _}, acc ->
                       content!(type, acc, key)
                     end)
-    {count, rest} = case Enum.filter(more, filter_by_content_type(content_type)) do
-                      [] -> {-1, data}
-                      some -> {count - Enum.count(some), data ++ some}
-                    end
-    random_of_type(count, type, content_type, {rest, state})
+    rest = Enum.filter(more, filter_by_content_type(content_type))
+    # TODO This will turn into an infinite loop for no data
+    random_of_type(count - Enum.count(rest), type, content_type, {data ++ rest, state})
   end
 
   defp filter_by_content_type(content_type) when is_function(content_type, 1),
