@@ -35,7 +35,7 @@ defmodule Eblox.Web.PageController do
   defp parse(conn, path) when is_list(path) do
     with [path | _collection] <- :lists.reverse(path),
          %Eblox.Content{title: title} = content <- Eblox.GenEblox.get(path) do
-      title = if title, do: [XmlBuilder.generate(title)], else: path
+      title = if title, do: [XmlBuilder.generate(title)], else: [path]
 
       conn
       |> assign(:content, content)

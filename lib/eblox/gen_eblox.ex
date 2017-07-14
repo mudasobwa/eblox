@@ -165,11 +165,17 @@ defmodule Eblox.GenEblox do
   defp content!(type, state, key) do
     case content(type, state[type], key) do
       {:new, normalized_key, data} ->
-        normalized_keys_collection = %{state[type] | normalized_key => data}
-        state = Keyword.update!(state, type, fn _ -> normalized_keys_collection end)
-        {data, state}
+        {data, cache_content(state, type, normalized_key, data)}
       {:existing, _, data} ->
         {data, state}
+    end
+  end
+
+  defp cache_content(state, type, key, data) do
+    if Application.get_env(:eblox, :cache_content, false) do
+      Keyword.update!(state, type, fn _ -> %{state[type] | key => data} end)
+    else
+      state
     end
   end
 

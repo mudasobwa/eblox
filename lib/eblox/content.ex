@@ -23,6 +23,9 @@ end
 defmodule Eblox.Content do
   @moduledoc false
 
+  # https://github.com/antonmi/flowex
+  # https://medium.com/@anton.mishchuk/flow-based-rest-api-with-flowex-and-plug-323d6920f166
+
   @typedoc """
   Content is the whole lazily cached content of the blog.
   """

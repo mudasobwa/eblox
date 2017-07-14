@@ -13,8 +13,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arsenal:400,700|Roboto:400,700|Marmelad|Yanone+Kaffeesatz:400,700&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 
-    <link rel="prev" title="<%= @prev_title %>" href="<%= @content.nav.prev %>">
-    <link rel="next" title="<%= @next_title %>" href="<%= @content.nav.next %>">
+    <%= if @content.nav do %>
+      <link rel="prev" title="<%= @prev_title %>" href="<%= @content.nav.prev %>">
+      <link rel="next" title="<%= @next_title %>" href="<%= @content.nav.next %>">
+    <% end %>
 
     <!-- wc -->
     <script type="text/javascript" src="<%= static_path(@conn, "/wc/webcomponentsjs/webcomponents-lite.min.js") %>"></script>
@@ -32,14 +34,22 @@
         <a id="logo-container" href="mailto:am@mudasobwa.ru">
           <img src="/images/avatar.jpg" alt="Aleksei “mudasobwa” Matiushkin" class="circle responsive-img brand-logo">
         </a>
+        <ul class="left">
+          <li><h4 class="white-text">е-бунгало ужасного ебунгала</h4></li>
+        </ul>
+        <%= if false do %>
         <ul class="right hide-on-med-and-down">
+          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Navbar Link</a></li>
           <li><a href="#">Navbar Link</a></li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Navbar Link</a></li>
+          <li><a href="#">Navbar 2</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <% end %>
       </div>
     </nav>
 
