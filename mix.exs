@@ -3,7 +3,7 @@ defmodule Eblox.Mixfile do
 
   def project do
     [app: :eblox,
-     version: "0.0.2",
+     version: "0.0.3",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -17,7 +17,7 @@ defmodule Eblox.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Eblox, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :flowex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,8 +38,12 @@ defmodule Eblox.Mixfile do
      {:edeliver, "~> 1.4.0"},
      {:distillery, "~> 1.0"},
 
-     {:xml_builder, "~> 0.0"},
-     {:markright, "~> 0.3"},
+     {:xml_builder, "~> 0.1"},
+     {:markright, "~> 0.5"},
+     {:flowex, "~> 0.5"},
+
+     {:credo, "~> 0.8", only: :dev},
+     {:ex_doc, "~> 0.11", only: :dev},
    ]
   end
 end

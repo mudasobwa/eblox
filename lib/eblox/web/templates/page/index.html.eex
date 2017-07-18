@@ -1,9 +1,31 @@
+<!--div class="row marketing">
+  <%= inspect(@content) %>
+</div-->
+
 <div class="row marketing">
-  <%= raw @content %>
+  <%= raw @content.html %>
 </div>
 
 <div class="row">
-  <div class="col s1"><a href="<%= @prev_link %>"><%= @prev_title %></a></div>
-  <div class="col s10"></div>
-  <div class="col s1"><a href="<%= @next_link %>"><%= @next_title %></a></div>
+  <div class="col s12 m12 center">
+    <%= if @content.nav && @content.nav.prev do %>
+      <a class="btn btn-floating teal"
+         href="<%= @content.nav.prev %>"
+         title="<%= @prev_title %>"><i class="material-icons medium">skip_previous</i></a>
+    <% else %>
+      <a class="btn btn-floating disabled"><i class="material-icons medium">skip_previous</i></a>
+    <% end %>
+    &nbsp;&nbsp;&nbsp;
+    <a class="btn btn-floating teal"
+       href="/"
+       title="🏠"><i class="material-icons medium">toc</i></a>
+    &nbsp;&nbsp;&nbsp;
+    <%= if @content.nav && @content.nav.next do %>
+      <a class="btn btn-floating teal"
+         href="<%= @content.nav.next %>"
+         title="<%= @next_title %>"><i class="material-icons medium">skip_next</i></a>
+    <% else %>
+      <a class="btn btn-floating disabled"><i class="material-icons medium">skip_next</i></a>
+    <% end %>
+  </div>
 </div>
