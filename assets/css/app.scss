@@ -14,6 +14,10 @@ h3 { color: color("teal", "darken-2") }
 h2 { color: color("teal", "darken-3"); }
 h1 { color: color("teal", "darken-4") }
 
+dt { font-weight: bold; }
+dd { font-style: italic; }
+blockquote { font-size: 95%; }
+
 main { font-size: 128%; }
 code {
   padding: 0.2em 0.1em;
@@ -24,13 +28,25 @@ code {
   border: none;
 }
 
-figure {
+figure, figcaption {
   border: 1px solid #ddd;
   background-color: #f0fff8;
-  padding: 5px;
-  display: table !important;
+  padding: 0.4em;
+  font-size: 86%;
+  color: #808a86;
 }
-figcaption { padding: 0; font-size: 80%; }
+
+figure {
+  display: table !important;
+  border-bottom: none;
+  padding-bottom: 0em;
+}
+figcaption {
+  display: table-caption !important;
+  caption-side: bottom;
+  border-top: none;
+  padding-top: 0em;
+}
 
 .overflow-hidden { overflow: hidden; height: 200px; }
 .footer-copyright { font-size: 76%; text-align: center; }
