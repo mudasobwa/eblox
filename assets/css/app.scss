@@ -11,7 +11,7 @@ h6 { color: color("teal", "lighten-2") }
 h5 { color: color("teal", "lighten-1") }
 h4 { color: color("teal", "darken-1") }
 h3 { color: color("teal", "darken-2") }
-h2 { color: color("teal", "darken-3"); }
+h2 { color: color("teal", "darken-3") }
 h1 { color: color("teal", "darken-4") }
 
 dt { font-weight: bold; }
@@ -24,6 +24,11 @@ code {
   border: 1px solid #ced;
   color: #698;
 }
+
+.top-bordered {
+  border-top: 1px solid color("teal", "lighten-4");
+}
+
 .footer-copyright code {
   border: none;
 }

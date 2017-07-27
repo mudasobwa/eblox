@@ -21,6 +21,7 @@ defmodule Eblox.Web.PageController do
     |> assign(:next_title, "⇒")
     |> prepare()
     |> thumbnails()
+    |> twits()
   end
 
   defp prepare(conn) do
@@ -29,6 +30,11 @@ defmodule Eblox.Web.PageController do
 
   defp thumbnails(conn) do
     assign(conn, :thumbnails, Eblox.GenEblox.random())
+  end
+
+  defp twits(conn) do
+    twits = Eblox.GenEblox.random(2, :collection, :twit)
+    assign(conn, :twits, %{top: Enum.at(twits, 0), bottom: Enum.at(twits, 1)})
   end
 
   defp parse(conn, []), do: parse(conn, [nil])
