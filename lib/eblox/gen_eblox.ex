@@ -102,12 +102,23 @@ defmodule Eblox.GenEblox do
 
   defp random_of_type(count, _, _, {data, state}) when count <= 0, do: {data, state}
   defp random_of_type(count, type, content_type, {data, state}) do
-    {more, state} = state[type]
-                    |> Enum.take_random(count)
-                    |> Enum.map_reduce(state, fn {key, _}, acc ->
-                      content!(type, acc, key)
-                    end)
-    rest = Enum.filter(more, filter_by_content_type(content_type))
+    {state, rest} =
+      try do
+        {more, state} = state[type]
+                        |> Enum.take_random(count)
+                        |> Enum.map_reduce(state, fn {key, _}, acc ->
+                          content!(type, acc, key)
+                        end)
+        rest = Enum.filter(more, filter_by_content_type(content_type))
+        {state, rest}
+      rescue
+        e in FunctionClauseError ->
+          e
+          |> inspect()
+          |> Logger.error()
+
+          {state, []}
+      end
     # TODO This will turn into an infinite loop for no data
     random_of_type(count - Enum.count(rest), type, content_type, {data ++ rest, state})
   end

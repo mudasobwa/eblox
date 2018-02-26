@@ -17,7 +17,7 @@ defmodule Eblox.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Eblox, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :flowex]]
+     applications: ~w|phoenix phoenix_pubsub phoenix_html cowboy logger gettext flowex|a]
   end
 
   # Specifies which paths to compile per environment.
@@ -28,7 +28,7 @@ defmodule Eblox.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
+    [{:phoenix, "~> 1.3.0"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
@@ -41,6 +41,8 @@ defmodule Eblox.Mixfile do
      {:xml_builder, "~> 0.1"},
      {:markright, "~> 0.5"},
      {:flowex, "~> 0.5"},
+
+     # {:ex_debug_toolbar, "~> 0.3"},
 
      {:credo, "~> 0.8", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev},

@@ -1,5 +1,6 @@
 defmodule Eblox.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :eblox
+  # use ExDebugToolbar.Phoenix
 
   socket "/socket", Eblox.Web.UserSocket
 

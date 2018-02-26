@@ -32,3 +32,8 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+# config :ex_debug_toolbar, enable: true
+#
+# config :my_app, MyApp.Endpoint,
+#   instrumenters: [ExDebugToolbar.Collector.InstrumentationCollector]

@@ -13,11 +13,11 @@
   },
   "devDependencies": {
     "babel-brunch": "~6.0.0",
-    "brunch": "2.7.4",
+    "brunch": "~2.10.0",
     "bower": "~1.8.0",
     "clean-css-brunch": "~2.0.0",
     "css-brunch": "~2.0.0",
-    "sass-brunch": "~2.0.0",
+    "sass-brunch": "~2.10.0",
     "javascript-brunch": "~2.0.0",
     "npm-polymer-elements": "~0.0.1",
     "polymer-brunch": "overminddl1/polymer-brunch",
