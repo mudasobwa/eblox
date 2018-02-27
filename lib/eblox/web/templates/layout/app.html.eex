@@ -26,6 +26,7 @@
     <script type="text/javascript" src="../src/js/spn.js"></script -->
 
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link  rel="icon" type="image/png" href="<%= static_path(@conn, "/favicon.png") %>">
   </head>
 
   <body>

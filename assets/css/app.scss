@@ -24,6 +24,7 @@ code {
   border: 1px solid #ced;
   color: #698;
 }
+pre > code { border: none; color: #898; }
 
 .top-bordered {
   border-top: 1px solid color("teal", "lighten-4");

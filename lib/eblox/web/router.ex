@@ -2,6 +2,10 @@ defmodule Eblox.Web.Router do
   use Eblox.Web, :router
 
   pipeline :browser do
+    plug Plug.Static,
+        at: "/", from: :eblox, gzip: false,
+        only: ~w(css fonts images js favicon.ico favicon.png robots.txt my_fine.html)
+
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
