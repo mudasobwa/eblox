@@ -30,7 +30,7 @@
   </head>
 
   <body>
-    <nav class="teal darken-4" role="navigation">
+    <nav class="purple darken-4" role="navigation">
       <div class="nav-wrapper container">
         <a id="logo-container" href="mailto:am@mudasobwa.ru">
           <img src="/images/avatar.jpg" alt="Aleksei “mudasobwa” Matiushkin" class="circle responsive-img brand-logo">
@@ -103,7 +103,7 @@
           <%= for thumbnail <- @thumbnails do %>
             <div class="col s12 m4">
               <div class="icon-block">
-                <h2 class="center teal-text darken-4"><i class="material-icons">flash_on</i></h2>
+                <h2 class="center purple-text darken-4"><i class="material-icons">flash_on</i></h2>
                 <h5 class="center"><a href="<%= thumbnail.nav.this %>"><%= raw thumbnail.title %></a></h5>
                 <div class="thumbnail-container overflow-hidden">
                     <div class="thumbnail-contents">
@@ -133,7 +133,7 @@
       </div>
     </div>
 
-    <footer class="page-footer teal darken-3">
+    <footer class="page-footer purple darken-3">
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
@@ -172,17 +172,17 @@
         </div>
       </div>
       <div class="footer-copyright">
-        <div class="container teal-text text-lighten-3">
+        <div class="container purple-text text-lighten-3">
           <strong>
-            <a class="teal-text text-lighten-5" href="http://creativecommons.org/licenses/by/3.0/deed">CC BY 3.0</a> <code>::</code>
+            <a class="purple-text text-lighten-5" href="http://creativecommons.org/licenses/by/3.0/deed">CC BY 3.0</a> <code>::</code>
             доктрина: строю метамодели <code>::</code>
-            <a class="teal-text text-lighten-5" href="http://rocket-science.ru/files/alexei-matyushkin.pdf">résumé</a> <code>::</code>
+            <a class="purple-text text-lighten-5" href="http://rocket-science.ru/files/alexei-matyushkin.pdf">résumé</a> <code>::</code>
             национальность: энтропиец <code>::</code>
-            <a class="teal-text text-lighten-5" href='mailto:am@mudasobwa.ru'>am@mudasobwa.ru</a> <code>::</code>
+            <a class="purple-text text-lighten-5" href='mailto:am@mudasobwa.ru'>am@mudasobwa.ru</a> <code>::</code>
             рожден: 0 октября <code>::</code>
-            <a class="teal-text text-lighten-5" href="http://feeds.feedburner.com/">RSS Feed</a> <code>::</code>
+            <a class="purple-text text-lighten-5" href="http://feeds.feedburner.com/">RSS Feed</a> <code>::</code>
             ❤ <code>::</code>
-            <a class="teal-text text-lighten-5" href="http://materializecss.com">materializecss</a>
+            <a class="purple-text text-lighten-5" href="http://materializecss.com">materializecss</a>
           </strong>
           <!--
           <a href="http://github.com/{{ site.author.github }}/">github.com/{{ site.author.github }}</a><br />

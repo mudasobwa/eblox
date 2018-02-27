@@ -7,27 +7,36 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Yanone Kaffeesatz", sanf-serif;
 }
 
-h6 { color: color("teal", "lighten-2") }
-h5 { color: color("teal", "lighten-1") }
-h4 { color: color("teal", "darken-1") }
-h3 { color: color("teal", "darken-2") }
-h2 { color: color("teal", "darken-3") }
-h1 { color: color("teal", "darken-4") }
+h6 { color: color("purple", "lighten-2") }
+h5 { color: color("purple", "lighten-1") }
+h4 { color: color("purple", "darken-1") }
+h3 { color: color("purple", "darken-2") }
+h2 { color: color("purple", "darken-3") }
+h1 { color: color("purple", "darken-4") }
+
+a { color: color("purple", "lighten-1") !important; }
+a:hover, a:active { color: color("purple", "accent-3") !important; }
+a:visited { color: color("purple", "darken-3") !important; }
 
 dt { font-weight: bold; }
 dd { font-style: italic; }
-blockquote { font-size: 95%; }
+blockquote {
+  font-size: 90%;
+  color: #656;
+  border-left: 5px solid color("purple", "darken-4") !important;
+  background-color: #FFFDFF;
+}
 
 main { font-size: 128%; }
 code {
   padding: 0.2em 0.1em;
-  border: 1px solid #ced;
-  color: #698;
+  border: 1px solid color("purple", "lighten-4");
+  color: color("purple", "darken-1");
 }
 pre > code { border: none; color: #898; }
 
 .top-bordered {
-  border-top: 1px solid color("teal", "lighten-4");
+  border-top: 1px solid color("purple", "lighten-4");
 }
 
 .footer-copyright code {
@@ -36,10 +45,10 @@ pre > code { border: none; color: #898; }
 
 figure, figcaption {
   border: 1px solid #ddd;
-  background-color: #f0fff8;
+  background-color: #fff0f8;
   padding: 0.4em;
   font-size: 86%;
-  color: #808a86;
+  color: #8a8086;
 }
 
 figure {
