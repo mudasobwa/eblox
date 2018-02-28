@@ -39,7 +39,7 @@ pre > code { border: none; color: #898; }
   border-top: 1px solid color("purple", "lighten-4");
 }
 
-footer { color: color("purple", "lighten-4"); }
+footer, footer a, footer a:visited { color: color("purple", "lighten-4") !important; }
 .footer-copyright code {
   border: none;
 }
