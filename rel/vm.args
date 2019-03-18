@@ -1,5 +1,5 @@
 ## Name of the node
--name eblox@ubuntu@ec2-35-161-94-153.us-west-2.compute.amazonaws.com
+-name eblox@ec2-35-161-94-153.us-west-2.compute.amazonaws.com
 
 ## Cookie for distributed erlang
 -setcookie cW=UBYQdOP_MZhb/F>bc[~5J!L~?q.Cu$:>`zlyribe7b:xt^Zf(UdEP%DY58_,@
