@@ -58,7 +58,7 @@ pre_erlang_clean_compile() {
     cd '$BUILD_AT'
 
     # run your custom task
-    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest $SILENCE
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
     echo 'Done'
   "
 }
