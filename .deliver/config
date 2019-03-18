@@ -54,10 +54,11 @@ pre_erlang_clean_compile() {
     npm install
     bower install
     node ./node_modules/brunch/bin/brunch build --production
-    cd -
+    cd '$BUILD_AT'
 
     # run your custom task
     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest $SILENCE
+    echo 'Done'
   "
 }
 
