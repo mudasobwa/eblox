@@ -1,6 +1,6 @@
 # .deliver/config
 
-alias ssh="ssh -i /home/am/.ssh/amotion-mudasobwa.pem"
+# alias ssh="ssh -i /home/am/.ssh/amotion-mudasobwa.pem"
 
 APP="eblox"
 
@@ -13,7 +13,7 @@ AUTO_VERSION=commit-count+git-revision+branch-unless-master
 RELEASE_STORE="ubuntu@ec2-35-161-94-153.us-west-2.compute.amazonaws.com:/otp/release/$APP/tar.gz"
 
 BUILD_HOST="ec2-35-161-94-153.us-west-2.compute.amazonaws.com"
-BUILD_USER="eblox"
+BUILD_USER="ubuntu"
 BUILD_AT="/otp/build/$APP"
 REL_DIR="$BUILD_AT/rel"
 RELEASE_DIR="$REL_DIR/$APP"
