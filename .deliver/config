@@ -52,6 +52,7 @@ pre_erlang_clean_compile() {
 
     cd assets
     npm install
+    bower install
     node ./node_modules/brunch/bin/brunch build --production
     cd -
 
