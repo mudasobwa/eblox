@@ -7,14 +7,13 @@ Path.join(["rel", "plugins", "*.exs"])
 |> Enum.map(&Code.eval_file(&1))
 
 use Mix.Releases.Config,
-    # This sets the default release built by `mix release`
-    default_release: :default,
-    # This sets the default environment used by `mix release`
-    default_environment: :dev
+  # This sets the default release built by `mix release`
+  default_release: :default,
+  # This sets the default environment used by `mix release`
+  default_environment: :dev
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
-
 
 # You may define one or more environments in this file,
 # an environment's settings will override those of a release
@@ -22,16 +21,16 @@ use Mix.Releases.Config,
 # and environment configuration is called a profile
 
 environment :dev do
-  set dev_mode: true
-  set include_erts: false
-  set cookie: :"qUx_:`%[W1]X0rOHB7,>@Wa@P_=ZkFJ9]zme1]2HLN=v>k}%.OAWF,P=e,Avg3yr"
+  set(dev_mode: true)
+  set(include_erts: false)
+  set(cookie: :"qUx_:`%[W1]X0rOHB7,>@Wa@P_=ZkFJ9]zme1]2HLN=v>k}%.OAWF,P=e,Avg3yr")
 end
 
 environment :prod do
-  set plugins: [Eblox.PhoenixDigestTask, Releases.Plugin.LinkConfig]
-  set include_erts: true
-  set include_src: false
-  set cookie: :"cW=UBYQdOP_MZhb/F>bc[~5J!L~?q.Cu$:>`zlyribe7b:xt^Zf(UdEP%DY58_,@"
+  set(plugins: [Releases.Plugin.LinkConfig])
+  set(include_erts: true)
+  set(include_src: false)
+  set(cookie: :"cW=UBYQdOP_MZhb/F>bc[~5J!L~?q.Cu$:>`zlyribe7b:xt^Zf(UdEP%DY58_,@")
 end
 
 # You may define one or more releases in this file.
@@ -40,5 +39,5 @@ end
 # will be used by default
 
 release :eblox do
-  set version: current_version(:eblox)
+  set(version: current_version(:eblox))
 end
